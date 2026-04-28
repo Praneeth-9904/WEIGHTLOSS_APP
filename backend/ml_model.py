@@ -4,7 +4,7 @@ import pandas as pd
 import joblib
 os.environ['TF_CPP_MIN_LOG_LEVEL'] = '3'
 import tensorflow as tf
-
+import gc
 ARTIFACT_DIR = "deployment_artifacts"
 
 if not os.path.exists(ARTIFACT_DIR):
@@ -17,7 +17,12 @@ agg_cluster = joblib.load(f"{ARTIFACT_DIR}/hc_cluster_model.pkl")
 hcmlp_model = tf.keras.models.load_model(f"{ARTIFACT_DIR}/hcmlp_model.keras")
 
 # Load actual database
-food_db = pd.read_csv(f"{ARTIFACT_DIR}/food_database.csv")
+# Replace your current food_db loading line with this optimized version:
+food_db = pd.read_csv(
+    f"{ARTIFACT_DIR}/food_database.csv",
+    usecols=['food_name', 'calories', 'protein'], # Only load necessary columns
+    dtype={'calories': 'float32', 'protein': 'float32'} # Use smaller float types
+)
 
 # --- FIX: Handle missing 'food_name' column from Jupyter export ---
 if 'food_name' not in food_db.columns:
@@ -39,6 +44,7 @@ if 'food_name' not in food_db.columns:
 
 food_db = food_db.dropna(subset=['food_name', 'calories', 'protein'])
 food_db['food_name_lower'] = food_db['food_name'].astype(str).str.lower()
+gc.collect()
 
 def calculate_bmr(weight, height, age, gender="male"):
     if gender == "male":

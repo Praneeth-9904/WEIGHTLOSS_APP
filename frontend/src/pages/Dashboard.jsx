@@ -21,7 +21,7 @@ export default function Dashboard() {
       const token = localStorage.getItem("token");
       if (!token) return;
       try {
-        const res = await fetch("http://localhost:8000/latest_plan", {
+        const res = await fetch("https://weightloss-app-frontend.onrender.com/latest_plan", {
           headers: { "Authorization": `Bearer ${token}` }
         });
         if (res.ok) {
@@ -51,7 +51,7 @@ export default function Dashboard() {
     const token = localStorage.getItem("token");
 
     try {
-      const response = await fetch("http://localhost:8000/predict", {
+      const response = await fetch("https://weightloss-app-frontend.onrender.com/predict", {
         method: "POST",
         headers: { 
           "Content-Type": "application/json",
