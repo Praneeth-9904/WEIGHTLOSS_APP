@@ -1,0 +1,13 @@
+fastapi
+uvicorn
+pydantic
+motor
+pandas
+numpy
+scikit-learn
+tensorflow-cpu
+PyWavelets
+scipy
+python-dotenv
+passlib[bcrypt]
+PyJWT
