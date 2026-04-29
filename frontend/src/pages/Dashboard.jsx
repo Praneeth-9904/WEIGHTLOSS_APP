@@ -21,7 +21,7 @@ export default function Dashboard() {
       const token = localStorage.getItem("token");
       if (!token) return;
       try {
-        const res = await fetch("weightlossapp-production.up.railway.app/latest_plan", {
+        const res = await fetch("https://weightlossapp-production.up.railway.app/latest_plan", {
           headers: { "Authorization": `Bearer ${token}` }
         });
         if (res.ok) {
@@ -51,7 +51,7 @@ export default function Dashboard() {
     const token = localStorage.getItem("token");
 
     try {
-      const response = await fetch("weightlossapp-production.up.railway.app/predict", {
+      const response = await fetch("https://weightlossapp-production.up.railway.app/predict", {
         method: "POST",
         headers: { 
           "Content-Type": "application/json",
