@@ -14,7 +14,7 @@ export default function LogFood() {
     const token = localStorage.getItem("token");
     if (!token) return;
     try {
-      const res = await fetch("https://weightloss-app-frontend.onrender.com/my_logs", {
+      const res = await fetch("weightlossapp-production.up.railway.app/my_logs", {
         headers: { "Authorization": `Bearer ${token}` }
       });
       if (res.ok) setLogs(await res.json());
@@ -31,7 +31,7 @@ export default function LogFood() {
     e.preventDefault();
     const token = localStorage.getItem("token");
     try {
-      const res = await fetch("https://weightloss-app-frontend.onrender.com/log_food", {
+      const res = await fetch("weightlossapp-production.up.railway.app/log_food", {
         method: "POST",
         headers: { 
           "Content-Type": "application/json",
